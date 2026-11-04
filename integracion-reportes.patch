@@ -1,0 +1,96 @@
+--- a/routes/web.php
++++ b/routes/web.php
+@@ -8,6 +8,7 @@
+
+ use App\Http\Controllers\MascotumController;
+ use App\Http\Controllers\RazaController;
++use App\Http\Controllers\ReporteController;
+ use App\Http\Controllers\ReservaController;
+ use App\Http\Controllers\RecordatorioController;
+ use App\Http\Controllers\RoleController;
+@@ -18,6 +19,7 @@
+ use App\Http\Controllers\UserController;
+ use App\Http\Controllers\VeterinarioController;
+ use Illuminate\Support\Facades\Auth;
++use App\Support\ReporteTipo;
+ use Illuminate\Support\Facades\Route;
+ 
+ Route::get('/', function () {
+@@ -108,3 +110,16 @@
+ // Monitor de Turnos para el Veterinario
+ Route::get('monitor-medico', [ConsultaController::class, 'monitor'])->name('consulta.monitor')->middleware('auth');
+ 
++// =========================================
++// REPORTES (solo lectura; el permiso por reporte se valida con Gates)
++// =========================================
++Route::middleware('auth')->prefix('reportes')->name('reportes.')->group(function () {
++    Route::get('/', [ReporteController::class, 'index'])->name('index');
++
++    Route::get('{tipo}', [ReporteController::class, 'show'])
++        ->where('tipo', ReporteTipo::patronRuta())->name('show');
++    Route::get('{tipo}/csv', [ReporteController::class, 'csv'])
++        ->where('tipo', ReporteTipo::patronRuta())->middleware('throttle:20,1')->name('csv');
++    Route::get('{tipo}/imprimir', [ReporteController::class, 'imprimir'])
++        ->where('tipo', ReporteTipo::patronRuta())->name('imprimir');
++});
+--- a/app/Providers/AppServiceProvider.php
++++ b/app/Providers/AppServiceProvider.php
+@@ -31,6 +31,13 @@
+         // Gate central para ocultar y proteger la administración desde el menú.
+         Gate::define('manage-users', fn ($user): bool => $user->hasRole('admin'));
+ 
++        // Reportes: los financieros (ingresos, cuentas por cobrar) son solo para
++        // administradores; los operativos también para user y veterinario.
++        Gate::define('ver-reportes-financieros', fn ($user): bool => $user->hasRole('admin'));
++        Gate::define('ver-reportes-operativos', fn ($user): bool => $user->hasRole('admin')
++            || $user->hasRole('user')
++            || $user->hasRole('veterinario'));
++
+         Password::defaults(
+             static fn (): Password => Password::min(12)
+         );
+--- a/config/adminlte.php
++++ b/config/adminlte.php
+@@ -416,7 +416,41 @@
+                     'classes' => 'ps-3',
+                 ],
+             ],
+-        ]
++        ],
++        [
++            'text' => 'Reportes',
++            'icon' => 'fas fa-chart-bar',
++            'can' => 'ver-reportes-operativos',
++            'submenu' => [
++                [
++                    'text' => 'Ingresos',
++                    'route' => ['reportes.show', ['tipo' => 'ingresos']],
++                    'classes' => 'ps-3',
++                    'can' => 'ver-reportes-financieros',
++                ],
++                [
++                    'text' => 'Cuentas por cobrar',
++                    'route' => ['reportes.show', ['tipo' => 'cuentas-por-cobrar']],
++                    'classes' => 'ps-3',
++                    'can' => 'ver-reportes-financieros',
++                ],
++                [
++                    'text' => 'Servicios',
++                    'route' => ['reportes.show', ['tipo' => 'servicios']],
++                    'classes' => 'ps-3',
++                ],
++                [
++                    'text' => 'Veterinarios',
++                    'route' => ['reportes.show', ['tipo' => 'veterinarios']],
++                    'classes' => 'ps-3',
++                ],
++                [
++                    'text' => 'Reservas y asistencia',
++                    'route' => ['reportes.show', ['tipo' => 'reservas']],
++                    'classes' => 'ps-3',
++                ],
++            ],
++        ],
+     ],
+ 
+ 

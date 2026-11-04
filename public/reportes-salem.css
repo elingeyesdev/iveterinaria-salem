@@ -1,0 +1,68 @@
+.salem-marca{display:flex;align-items:center;gap:18px;color:#292b2c}
+.salem-logo{width:88px;height:88px;object-fit:contain;border-radius:50%;flex-shrink:0}
+.salem-nombre{font:800 26px/1.1 Arial,sans-serif;letter-spacing:.14em}
+.salem-subtitulo{font-size:14px;margin-top:4px}
+.salem-etiqueta{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#766021;margin-top:9px}
+.salem-cabecera{background:#fff;border:1px solid #e5e1d8;border-top:4px solid #c59c38;border-radius:8px;padding:22px 26px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.salem-contexto{text-align:right;color:#60656a;font-size:13px}
+.salem-reportes .card{border-radius:8px;border-color:#e5e1d8}
+.salem-reportes .card-outline{border-top-color:#c59c38}
+.salem-reportes .table thead th{background:#303233;color:#fff;border:0;padding:13px 12px}
+.salem-reportes .table td{padding:11px 12px;border-color:#eeece6}
+.salem-reportes .table-striped tbody tr:nth-of-type(odd){background:#faf9f6}
+.salem-reportes .table tfoot td{background:#f3eedf;border-top:2px solid #c59c38}
+.salem-reportes .text-right,.salem-documento .r{font-variant-numeric:tabular-nums}
+.salem-reportes .info-box{border:1px solid #e5e1d8;border-top:3px solid #c59c38;border-radius:8px}
+.salem-reportes .info-box-text{white-space:normal}
+.salem-reportes .info-box-icon{background:#f5efdf!important;color:#786024!important}
+.salem-reportes .btn-primary{background:#343637;border-color:#343637}
+.salem-reportes .btn-primary:hover{background:#50504a}
+.salem-reportes .card-body .bg-primary{background:#343637!important}
+.salem-documento{box-sizing:border-box;font-family:Arial,sans-serif;color:#292b2c;font-size:12px;margin:0;padding:28px;background:#eeede9}
+.salem-documento *{box-sizing:border-box}
+.salem-hoja{max-width:1120px;margin:0 auto;padding:36px;background:#fff;box-shadow:0 8px 36px #00000012;border-top:5px solid #c59c38}
+.salem-documento .toolbar{max-width:1120px;margin:0 auto 20px;display:flex;gap:10px}
+.salem-documento .toolbar button,.salem-documento .toolbar a{padding:10px 16px;font:inherit;border:1px solid #343637;background:#343637;color:#fff;border-radius:5px;text-decoration:none;cursor:pointer}
+.salem-documento .toolbar a{background:#fff;color:#343637}
+.salem-documento header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:22px;border-bottom:1px solid #ddd8ca}
+.salem-documento .meta{text-align:right;color:#62676b;font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.salem-documento h1{font-size:27px;letter-spacing:-.025em;margin:24px 0 8px}
+.salem-documento .descripcion{color:#60656a;line-height:1.6;margin:0 0 20px}
+.salem-documento .filtros{background:#f6f3eb;border-left:3px solid #c59c38;padding:12px 15px;margin-bottom:22px;line-height:1.7}
+.salem-documento .kpis{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.salem-documento .kpi{flex:1 1 140px;border:1px solid #e2ded4;border-top:3px solid #c59c38;padding:14px;border-radius:4px;break-inside:avoid}
+.salem-documento .kpi .l{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#60656a}
+.salem-documento .kpi .v{font-size:22px;font-weight:700;margin-top:9px;font-variant-numeric:tabular-nums}
+.salem-documento .kpi .d{font-size:10px;color:#60656a;margin-top:6px}
+.salem-documento .detalle-titulo{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px}
+.salem-documento h2{font-size:14px;margin:0}
+.salem-documento .detalle-titulo span{color:#60656a;font-size:11px}
+.salem-documento table{width:100%;border-collapse:collapse;font-size:11px}
+.salem-documento th{background:#303233;color:#fff;text-align:left;padding:10px 9px}
+.salem-documento td{padding:9px;border-bottom:1px solid #e9e6df;overflow-wrap:anywhere}
+.salem-documento tr:nth-child(even) td{background:#faf9f6}
+.salem-documento tfoot td{font-weight:700;background:#f3eedf;border-top:2px solid #c59c38}
+.salem-documento .r{text-align:right}
+.salem-documento .notas{margin-top:20px;color:#60656a;font-size:10px;line-height:1.6}
+.salem-documento .notas p{margin:4px 0}
+.salem-documento footer{margin-top:28px;padding-top:12px;border-top:1px solid #ddd8ca;color:#60656a;font-size:10px;display:flex;justify-content:space-between;gap:20px}
+.salem-documento thead{display:table-header-group}
+.salem-documento tfoot{display:table-row-group}
+.salem-documento tr{break-inside:avoid}
+.salem-documento .sin-datos{padding:28px;text-align:center;border:1px dashed #d6d0c1;color:#60656a}
+@media(max-width:600px){.salem-cabecera,.salem-documento header{flex-direction:column;align-items:flex-start}.salem-contexto,.salem-documento .meta{text-align:left}.salem-documento{padding:12px}.salem-hoja{padding:18px;overflow-x:auto}.salem-documento .toolbar{flex-wrap:wrap}}
+@media print{@page{size:A4 landscape;margin:14mm}.salem-documento{padding:0;background:#fff;font-size:10px}.salem-hoja{max-width:none;padding:0;box-shadow:none;overflow:visible}.salem-documento .toolbar{display:none}.salem-documento header{flex-direction:row;padding-top:12px}.salem-documento .meta{text-align:right}.salem-documento h1{font-size:23px}.salem-documento th,.salem-documento tfoot td,.salem-documento .kpi,.salem-documento .filtros{-webkit-print-color-adjust:exact;print-color-adjust:exact}.salem-documento th{border-bottom:2px solid #777}.salem-documento .detalle-titulo{break-after:avoid}.salem-documento .salem-logo{width:72px;height:72px}}
+
+/* Salem 2026: refinamiento editorial de reportes; paleta grafito/blanco/dorado */
+.salem-reportes .card{box-shadow:0 3px 16px rgba(30,32,32,.055)!important;transition:box-shadow .2s ease,border-color .2s ease}
+.salem-reportes .card:hover{border-color:#d1bd8e;box-shadow:0 8px 24px rgba(30,32,32,.09)!important}
+.salem-reportes .card-header{padding:15px 19px;border-bottom:1px solid #eeeae1}
+.salem-reportes .info-box{min-height:104px;background:#fff}
+.salem-reportes .info-box-number{letter-spacing:-.02em;color:#282b2c}
+.salem-reportes .table th{font-size:.79rem;letter-spacing:.025em}
+.salem-reportes .table tbody tr:hover{background:#f4f0e7!important}
+.salem-reportes .btn{border-radius:5px;font-weight:600}
+.salem-reportes .salem-metodologia{border:1px solid #e8dfc9;border-left:4px solid #b68b2d;background:#fcfaf4;padding:13px 16px;border-radius:5px;color:#56534c;font-size:.88rem}
+.salem-documento .metodologia-titulo{margin-top:25px;margin-bottom:10px;border-bottom:1px solid #e5dfd1;padding-bottom:8px}
+.salem-documento .notas{line-height:1.65}
+@media print{.salem-documento .metodologia-titulo{break-after:avoid}.salem-documento .kpi,.salem-documento tr{break-inside:avoid}}

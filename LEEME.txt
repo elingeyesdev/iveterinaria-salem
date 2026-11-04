@@ -1,0 +1,70 @@
+VETERINARIA SALEM - CORRECCIONES (no se modifican migraciones ni tablas)
+========================================================================
+
+Haga un respaldo del proyecto antes de empezar.
+
+PASO 1 - BORRAR estos archivos (ANTES de copiar los nuevos)
+------------------------------------------------------------
+Modelos en minúscula (en Windows, si no se borran primero, al copiar se
+conserva el nombre en minúscula y el error en Linux sigue):
+  app/Models/especie.php
+  app/Models/raza.php
+
+Módulos de práctica y archivos sin uso:
+  app/Models/Libro.php
+  app/Models/Categoria.php
+  app/Models/cr.php
+  app/Http/Controllers/LibroController.php
+  app/Http/Controllers/CategoriaController.php
+  app/Http/Controllers/ReservaPublicaController.php   (vacío, sin ruta)
+  app/Http/Controllers/salvado.php                    (copia duplicada de RoleUserController)
+  app/Http/Requests/LibroRequest.php
+  app/Http/Requests/CategoriaRequest.php
+  resources/views/libro/        (carpeta completa)
+  resources/views/categoria/    (carpeta completa)
+
+Si usa git, para el renombrado use:
+  git mv app/Models/especie.php app/Models/Especie.php
+  git mv app/Models/raza.php app/Models/Raza.php
+
+PASO 2 - COPIAR los archivos de este paquete respetando las carpetas
+---------------------------------------------------------------------
+  app/Models/Especie.php                         (renombrado, mismo contenido)
+  app/Models/Raza.php                            (renombrado, mismo contenido)
+  app/Services/ReservaService.php                (turno cancelado se libera)
+  app/Http/Controllers/ReservaController.php     (lo mismo al editar)
+  app/Services/ReporteService.php                (reporte de veterinarios)
+  routes/web.php                                 (sin libros/categorías; acentos corregidos)
+  app/Http/Controllers/ConsultaController.php    (solo acentos corregidos en comentarios)
+  tests/Feature/ReservaHorarioCanceladoTest.php  (nuevo)
+  tests/Feature/ReporteServiceTest.php           (una prueba nueva)
+
+PASO 3 - Ejecutar
+-----------------
+  composer dump-autoload
+  php artisan optimize:clear
+  php artisan test
+
+Resultado esperado: 213 pruebas aprobadas.
+NO hace falta ejecutar php artisan migrate.
+
+QUÉ CAMBIÓ
+----------
+1. Error 500 en Linux: los archivos de Especie y Raza ahora coinciden con
+   el nombre de su clase.
+
+2. Reserva cancelada que bloqueaba el turno: la tabla reserva tiene
+   unique(fecha, hora_inicio). Al reservar o editar, si en ese turno hay
+   una reserva Cancelada, se le cambia el segundo de la hora
+   (09:00:00 -> 09:00:01) y el turno queda libre. La cancelada se conserva
+   para el reporte de reservas y asistencia, y como el modelo muestra las
+   horas como HH:MM, en pantalla sigue viéndose 09:00. No se modifica
+   updated_at.
+
+3. Libros y Categorías eliminados: sus tablas ya no existen y sus rutas
+   daban error 500.
+
+4. Reporte de veterinarios: las columnas, el indicador y la serie de
+   "Emergencias" solo aparecen si el rango tiene consultas de emergencia
+   (registros históricos). Si no hay, se muestra "Facturado por consulta"
+   en lugar del indicador en 0.

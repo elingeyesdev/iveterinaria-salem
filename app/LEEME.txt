@@ -1,0 +1,11 @@
+OWASP ASVS 4.0.3 - V5.1.1
+
+COPIAR Y PEGAR:
+1. Copia app/Http/Middleware/PreventHttpParameterPollution.php a tu proyecto.
+2. Reemplaza bootstrap/app.php por bootstrap_app.php (renómbralo a app.php).
+3. Opcional: copia tests/Feature/HttpParameterPollutionTest.php.
+4. Opcional: copia docs/owasp/V5.1.1_HTTP_Parameter_Pollution.md.
+
+NO se modifican migraciones ni tablas.
+
+IMPORTANTE: el middleware bloquea parámetros escalares duplicados en la query string y claves duplicadas en JSON cuando el cuerpo bruto está disponible. Las colecciones PHP legítimas como servicios[]=1&servicios[]=2 se permiten.

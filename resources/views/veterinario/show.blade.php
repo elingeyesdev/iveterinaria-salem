@@ -1,0 +1,53 @@
+@extends('layouts.app')
+
+@section('template_title')
+    {{ $veterinario->name ?? __('Show') . " " . __('Veterinario') }}
+@endsection
+
+@section('content')
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="float-left">
+                            <span class="card-title">{{ __('Show') }} Veterinario</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-primary btn-sm" href="{{ route('veterinarios.index') }}"> {{ __('Back') }}</a>
+                        </div>
+                    </div>
+
+                    <div class="card-body bg-white">
+                        
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Nombre:</strong>
+                                    {{ $veterinario->nombre }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Apellido:</strong>
+                                    {{ $veterinario->apellido }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Direccion:</strong>
+                                    {{ $veterinario->direccion }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Correo:</strong>
+                                    {{ $veterinario->correo }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Telefono:</strong>
+                                    {{ $veterinario->telefono }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Estado:</strong>
+                                    {{ $veterinario->estado }}
+                                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
